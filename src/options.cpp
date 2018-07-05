@@ -3,12 +3,12 @@
 #include <vector>
 #include "options.hpp"
 
-std::vector<std::string> vectorize_options(int argc, char *input[])
+std::vector<std::string> vectorize_options(int argc, char *argv[])
 {
     std::vector<std::string> output;
     for (int i = 1; i < argc; ++i)
     {
-        output.push_back(input[i]);
+        output.push_back(argv[i]);
     }
 
     return output;

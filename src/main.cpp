@@ -10,13 +10,33 @@
 
 int main(int argc, char *argv[])
 {
-    if (argc < 2)
+    input inp;
+    std::vector<std::string> options = vectorize_options(argc, argv);
+    std::string txt = parse_options_for_text(options);
+
+    if (txt == "")
     {
-        print_zigzag_version(MAJOR_VERSION, MINOR_VERSION);
-        return 0;
+        std::string cinput;
+        while (std::getline(std::cin, cinput))
+        {
+            if (cinput.empty())
+            {
+                break;
+            }
+            else
+            {
+                inp.text += cinput + "\n";
+            }
+        }
+    }
+    else
+    {
+        inp.text = txt;
     }
 
-    input inp(vectorize_options(argc, argv));
+    inp.height = parse_options_for_height(options);
+    inp.version = parse_options_for_version(options);
+    inp.reverse = parse_options_for_reverse(options);
 
     if (inp.version)
     {

@@ -1,6 +1,14 @@
 #include "input.hpp"
 #include "options.hpp"
 
+input::input()
+{
+    height = 5;
+    version = false;
+    reverse = false;
+    text = "";
+}
+
 input::input(std::vector<std::string> options)
 {
     height = parse_options_for_height(options);
