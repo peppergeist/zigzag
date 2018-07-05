@@ -1,6 +1,6 @@
 #include <string>
 #include <vector>
-
+#include <iostream>
 #include "input.hpp"
 
 std::vector<std::string> split_text_into_zigzag_rows(input inp)
@@ -11,9 +11,17 @@ std::vector<std::string> split_text_into_zigzag_rows(input inp)
 
     for (int i = 0; i < inp.text.size(); ++i)
     {
+        if (inp.text[i] == '\n')
+        {
+            inp.text = inp.text.substr(i + 1, std::string::npos);
+            std::vector<std::string> remaining = split_text_into_zigzag_rows(inp);
+            output.insert(output.end(), remaining.begin(), remaining.end());
+            return output;
+        }
+
         for (int r = 0; r < output.size(); ++r)
         {
-            if (r == row)
+            if (r == row && inp.text[i] != '\t')
             {
                 output[r].push_back(inp.text[i]);
             }
